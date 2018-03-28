@@ -4,7 +4,6 @@ import axios from 'axios';
 export default class NewPlaylist extends React.Component{
   constructor(props){
     super(props)
-    console.log(props)
     this.state = {
       inputValue: "",
       submittable: false,
