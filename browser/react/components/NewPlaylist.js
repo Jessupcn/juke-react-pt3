@@ -4,6 +4,7 @@ import axios from 'axios';
 export default class NewPlaylist extends React.Component{
   constructor(props){
     super(props)
+    console.log(props)
     this.state = {
       inputValue: "",
       submittable: false,
@@ -13,10 +14,10 @@ export default class NewPlaylist extends React.Component{
     this.handleSubmit = this.handleSubmit.bind(this);
 
   }
-  
+
   handleChange (syntheticEvent) {
     const input = syntheticEvent.target.value
-    if(input.length > 0 && input.length <16 ){
+    if (input.length > 0 && input.length < 16 ){
       this.setState({
         hasChanged: true,
         submittable: true,
@@ -33,15 +34,10 @@ export default class NewPlaylist extends React.Component{
 
   handleSubmit(submitEvent){
     submitEvent.preventDefault();
-    console.log('state', this.state.inputValue)
     //axios request here
     const name = this.state.inputValue
-    axios.post('/api/playlists', {name})
-    .then(res => res.data)
-    .then(result => {
-    console.log(result) // response json from the server!
-  });
-    
+    this.props.newPlaylistPost(name);
+
     //do this last
     this.setState({submittable: false, inputValue: "", hasChanged: false})
   }
@@ -49,8 +45,6 @@ export default class NewPlaylist extends React.Component{
   render(){
 
     return (
-      
-      
       <div className="well">
         <form className="form-horizontal" onSubmit={this.handleSubmit}>
           <fieldset>

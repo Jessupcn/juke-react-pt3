@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Sidebar = (props) => {
+  console.log('sidebar props: ', props);
+  const playlists = props.playlists;
 
   return (
     <sidebar>
@@ -24,10 +26,29 @@ const Sidebar = (props) => {
               <span className="glyphicon glyphicon-plus"></span> PLAYLIST
             </Link>
           </h4>
+          <hr />
+          <ul className="list-unstyled">
+          {
+            playlists.map(playlist => {
+              return (
+                <li className="playlist-item menu-item" key={playlist.id}>
+                  <Link to={`/playlists/${playlist.id}`}>{ playlist.name }</Link>
+                </li>
+              );
+            })
+          }
+          </ul>
         </section>
     </sidebar>
 
   );
 }
+
+// <li className="playlist-item menu-item">
+//   <Link to="FILL_ME_IN">some playlist</Link>
+// </li>
+// <li className="playlist-item menu-item">
+//   <Link to="WHERE_TO_GO">another playlist</Link>
+// </li>
 
 export default Sidebar;
